@@ -9,7 +9,7 @@ var connectWs = () => {
 
     ws.onmessage = function(message) {
         console.log(message)
-        if (message.data === "sample" && config.sampleRate) {
+        if (message.data === "sample" && config && config.sampleRate) {
             ws.send("" + config.sampleRate);
         } else if (!config) {
             config = JSON.parse(message.data);
@@ -51,7 +51,7 @@ var startFFTs = () => {
         analyser.connect(processor);
         processor.connect(context.destination);
 
-        config.sampleRate = analyser.sampleRate;
+        config.sampleRate = context.sampleRate;
         ws.send("" + config.sampleRate);
 
         startFFTsButton.disabled = true;
