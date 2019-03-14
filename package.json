@@ -1,0 +1,29 @@
+{
+  "name": "node-live-webaudio-fft",
+  "version": "0.1.0",
+  "description": "Proxies FFT and Time-Domain data from WebAudio page reading from live input.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nge6427/node-live-webaudio-fft.git"
+  },
+  "keywords": [
+    "webaudio",
+    "mic",
+    "live",
+    "fft"
+  ],
+  "author": "nge6427",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nge6427/node-live-webaudio-fft/issues"
+  },
+  "homepage": "https://github.com/nge6427/node-live-webaudio-fft#readme",
+  "dependencies": {
+    "serve-static": "^1.13.2",
+    "ws": "^6.2.0"
+  }
+}
