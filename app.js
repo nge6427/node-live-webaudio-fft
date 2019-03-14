@@ -13,7 +13,7 @@ const config = {
     bufferSize: 1024
 };
 
-let sampleRate;
+let sampleRate = null;
 
 class LiveFFT extends EventEmitter {
     constructor(configOverride) {
@@ -35,14 +35,14 @@ class LiveFFT extends EventEmitter {
 
         wss.on('connection', (ws) => {
             console.log('Connected, requesting sample rate...');
+            sampleRate = null;
             ws.send('sample');
 
             ws.on('message', (data) => {
                 if (typeof data === 'string') {
                     sampleRate = parseInt(data);
                     console.log('Sample rate set to ' + sampleRate);
-                    this.emit('ready');
-                } else {
+                } else if (sampleRate) {
                     this.emit('spectrum', data.slice(0, config.analyserOptions.fftSize / 2));
                     this.emit('waveform', data.slice(config.analyserOptions.fftSize / 2));
                 }
