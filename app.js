@@ -41,10 +41,12 @@ class LiveFFT extends EventEmitter {
             ws.on('message', (data) => {
                 if (typeof data === 'string') {
                     sampleRate = parseInt(data);
+                    this.emit('sampleRate', sampleRate);
                     console.log('Sample rate set to ' + sampleRate);
                 } else if (sampleRate) {
-                    this.emit('spectrum', data.slice(0, config.analyserOptions.fftSize / 2));
-                    this.emit('waveform', data.slice(config.analyserOptions.fftSize / 2));
+                    this.emit('frequencyData', data.slice(0, config.analyserOptions.fftSize / 2));
+                    this.emit('timeDomainData', data.slice(config.analyserOptions.fftSize / 2));
+                    this.emit('combinedData', data);
                 }
             });
 
